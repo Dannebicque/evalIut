@@ -1,0 +1,40 @@
+Coucou
+{% set nbcrit = 0 %}
+{% for critere in grille %}
+<p>{{ loop.index }} - {{ critere.libelle_critere }}</p>
+    <div>
+        {% set nbcrit = nbcrit +1 %}
+        {% for chx in critere.choix %}
+            <input type="radio"
+                   class="radio"
+                   name="q{{ nbcrit }}"
+                   id="q{{ nbcrit }}_{{ loop.index }}"
+                   value="{{ chx.point }}">
+            {{ chx.libelle }}
+        {% endfor %}
+    </div>
+
+{% endfor %}
+<br>
+<div id="result" style="font-size: 30px; font-weight: bold"></div>
+---
+
+<script>
+  let result = document.querySelector('#result')
+  document.body.addEventListener('change', function (e) {
+    const rbs = document.querySelectorAll('.radio:checked')
+    let selectedValue = 0
+    for (const rb of rbs) {
+      //if (rb.checked) {
+        selectedValue += parseFloat(rb.value)
+      //}
+    }
+    console.log(selectedValue)
+    result.textContent = selectedValue
+  })
+  // let input = document.querySelector('.radio');
+  // let result = document.querySelector('#result');
+  // input.addEventListener('change', function () {
+  //   console.log(this.value)
+  // });
+</script>
