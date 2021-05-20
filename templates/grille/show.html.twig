@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Grille{% endblock %}
+
+{% block body %}
+    <h1>Grille</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ grille.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ grille.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ grille.description }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ grille.created ? grille.created|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ grille.updated ? grille.updated|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Criteres</th>
+                <td>{{ affiche_grille(grille.criteres) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('grille_index') }}">back to list</a>
+
+    <a href="{{ path('grille_edit', {'id': grille.id}) }}">edit</a>
+
+    {{ include('grille/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Grille index{% endblock %}
+
+{% block body %}
+    <h1>Grille index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Criteres</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for grille in grilles %}
+            <tr>
+                <td>{{ grille.id }}</td>
+                <td>{{ grille.titre }}</td>
+                <td>{{ grille.description }}</td>
+                <td>{{ grille.created ? grille.created|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ grille.updated ? grille.updated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ grille.criteres }}</td>
+                <td>
+                    <a href="{{ path('grille_show', {'id': grille.id}) }}">show</a>
+                    <a href="{{ path('grille_edit', {'id': grille.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('grille_new') }}">Create new</a>
+{% endblock %}
